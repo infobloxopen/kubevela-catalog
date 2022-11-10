@@ -2,11 +2,11 @@ package main
 
 _targetNamespace: string
 
-bindingClusterAdmin: {
+clusterRoleBinding: {
 	apiVersion: "rbac.authorization.k8s.io/v1"
 	kind:       "ClusterRoleBinding"
 	metadata: {
-		name: "cluster-reconciler"
+		name: "fluxcd-cluster-reconciler"
 	}
 	roleRef: {
 		apiGroup: "rbac.authorization.k8s.io"
@@ -15,11 +15,7 @@ bindingClusterAdmin: {
 	}
 	subjects: [{
 		kind:      "ServiceAccount"
-		name:      "sa-kustomize-controller"
-		namespace: _targetNamespace
-	}, {
-		kind:      "ServiceAccount"
-		name:      "sa-helm-controller"
+		name:      "default"
 		namespace: _targetNamespace
 	}]
 }
